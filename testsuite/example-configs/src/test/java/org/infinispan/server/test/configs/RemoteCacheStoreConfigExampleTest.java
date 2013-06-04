@@ -22,6 +22,7 @@ import org.infinispan.arquillian.core.InfinispanResource;
 import org.infinispan.arquillian.core.RemoteInfinispanServer;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 import org.jboss.arquillian.container.test.api.ContainerController;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -70,10 +71,14 @@ public class RemoteCacheStoreConfigExampleTest {
    @Before
    public void setUp() throws Exception {
       controller.start(CONTAINER1);
-      rcm1 = new RemoteCacheManager(server1.getHotrodEndpoint().getInetAddress().getHostName(),
-                                    server1.getHotrodEndpoint().getPort());
-      rcm2 = new RemoteCacheManager(server2.getHotrodEndpoint().getInetAddress().getHostName(),
-                                    server2.getHotrodEndpoint().getPort());
+      rcm1 = new RemoteCacheManager(new ConfigurationBuilder().addServer()
+                                          .host(server1.getHotrodEndpoint().getInetAddress().getHostName())
+                                          .port(server1.getHotrodEndpoint().getPort())
+                                          .build());
+      rcm2 = new RemoteCacheManager(new ConfigurationBuilder().addServer()
+                                          .host(server2.getHotrodEndpoint().getInetAddress().getHostName())
+                                          .port(server2.getHotrodEndpoint().getPort())
+                                          .build());
    }
 
    @After
