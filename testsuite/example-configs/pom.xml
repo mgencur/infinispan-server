@@ -191,6 +191,20 @@
                         </parameter>
                      </parameters>
                   </transformationSet>
+                  <transformationSet>
+                     <dir>${server2.dist}/standalone/configuration/</dir>
+                     <includes>
+                        <include>standalone-compatibility-mode.xml</include>
+                     </includes>
+                     <outputDir>${server2.dist}/standalone/configuration</outputDir>
+                     <stylesheet>${config.dir}/config-modifier.xsl</stylesheet>
+                     <parameters>
+                        <parameter>
+                           <name>removeRestSecurity</name>
+                           <value>true</value>
+                        </parameter>
+                     </parameters>
+                  </transformationSet>
                </transformationSets>
             </configuration>
          </plugin>

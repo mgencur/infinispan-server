@@ -40,13 +40,13 @@
       </replacement>
    </supplement>
    <supplement name="compatibility-mode">
-      <replacement placeholder="@@default-cache-container@@" attributeValue="local" />
+      <replacement placeholder="@@default-cache-container@@" attributeValue="clustered" />
       <replacement placeholder="CONNECTORS">
-         <hotrod-connector socket-binding="hotrod" cache-container="local">
+         <hotrod-connector socket-binding="hotrod" cache-container="clustered">
             <topology-state-transfer lazy-retrieval="false" lock-timeout="1000" replication-timeout="5000" />
          </hotrod-connector>
-         <memcached-connector socket-binding="memcached" cache-container="local" cache="default" />
-         <rest-connector virtual-server="default-host" cache-container="local" security-domain="other" auth-method="BASIC" />
+         <memcached-connector socket-binding="memcached" cache-container="clustered" cache="default" />
+         <rest-connector virtual-server="default-host" cache-container="clustered" security-domain="other" auth-method="BASIC" />
       </replacement>
    </supplement>
    <socket-binding name="hotrod" port="11222" />
