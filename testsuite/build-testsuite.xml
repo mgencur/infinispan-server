@@ -112,6 +112,12 @@
         <transform in="clustered.xml" out="testsuite/clustered-leveldb-repl.xml"
                    modifyInfinispan="${infinispan.parts}/leveldb-repl.xml"
                    filtering="true"/>
+        <transform in="clustered.xml" out="testsuite/clustered-auth.xml"
+                   modifyInfinispan="${infinispan.parts}/default-repl.xml" addAuth="${other.parts}/jgroups-auth.xml"
+                   filtering="true"/>
+        <transform in="clustered.xml" out="testsuite/clustered-auth-wrong-certificate.xml"
+                   modifyInfinispan="${infinispan.parts}/default-repl.xml" addAuth="${other.parts}/jgroups-auth-malicious.xml"
+                   filtering="true"/>
     </target>
 
     <macrodef name="transform">
@@ -128,11 +134,13 @@
         <attribute name="infinispanServerEndpoint" default="false"/>
         <attribute name="infinispanFile" default="false"/>
         <attribute name="filtering" default="false"/>
+        <attribute name="addAuth" default="false"/>
 
         <sequential>
             <xslt in="@{transformDir}/@{in}" out="@{transformDir}/@{in}-transformed" style="@{templateFile}">
                 <param name="modifyInfinispan" expression="@{modifyInfinispan}"/>
                 <param name="modifyRelay" expression="@{modifyRelay}"/>
+                <param name="addAuth" expression="@{addAuth}"/>
                 <param name="modifyMulticastAddress" expression="@{modifyMulticastAddress}"/>
                 <param name="modifyRemoteDestination" expression="@{modifyRemoteDestination}"/>
                 <param name="modifyOutboundSocketBindingHotRod" expression="@{modifyOutboundSocketBindingHotRod}"/>
